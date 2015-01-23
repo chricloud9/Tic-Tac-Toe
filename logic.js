@@ -1,3 +1,10 @@
+//The last tile clicked by the player
+var lastTile;
+//count X wins
+var xScore = 0;
+//count O wins
+var oScore = 0;
+
 var tie = false;
 //if this is true, player X won
 var xWins = false;
@@ -14,17 +21,17 @@ var tiles = document.getElementsByClassName("tile");
 
 
 var addAvatar = function(tileNumber){
+	lastTile = tileNumber;
 	//We always start with X, so if our turn number is even, we should be putting an X into that div
 	if(oWins == true || xWins == true || tie == true ){
 		playAgain();
 		oWins = false;
 		xWins = false;
+		tie = false;
 		turn = 0;
 	}
 
-	if (turn>=4){
-		console.log("checking winners");
-		}
+	
 	if(turn%2 ==0){
 		if(boardArray[tileNumber] != undefined){
 			return;
@@ -45,7 +52,10 @@ var addAvatar = function(tileNumber){
 		//if five turns have been made, minumum possible for 
 		//a wincheck to see if player X, the first to move, 
 		//has won
-		checkWinnersX();
+		if (turn>=4){
+			console.log("checking winners");
+			checkWinnersX("X");
+		}
 	}
 }
 	//if the turn number isn't even, we should be putting an 
@@ -55,21 +65,24 @@ var addAvatar = function(tileNumber){
 			return;
 		}
 		else{
-		//sets the point in boardArray matching with the tile 
-		//number clicked to O
-		boardArray[tileNumber] = "O"
-		//adds an O to the tile number clicked
-		tiles[tileNumber].innerHTML = "O";
-		
-		//increments the turn var, so we know where we are
-		turn++;
-		//tell devs what we've played so far
-		console.log(boardArray);
-
-		checkWinnersO();
-		//if five turns have been made, minumum possible for a win
-		//check to see if player O, the second to move, has won
-	}
+			//sets the point in boardArray matching with the tile 
+			//number clicked to O
+			boardArray[tileNumber] = "O"
+			//adds an O to the tile number clicked
+			tiles[tileNumber].innerHTML = "O";
+			
+			//increments the turn var, so we know where we are
+			turn++;
+			//tell devs what we've played so far
+			console.log(boardArray);
+			
+			if (turn>=4){
+				console.log("checking winners");
+				checkWinnersX("O");
+			}
+			
+			
+		}
 	}
 
 }
@@ -78,81 +91,63 @@ var addAvatar = function(tileNumber){
 //disable the onclick event
 
 
-var checkWinnersX = function(){
+var checkWinnersX = function(piece){
 	for(var i=0; i<7; i++){
 		//Checks horizontal matches. As long as we aren't starting from
 		//the 2nd, 3rd, 5th, or 6th tile - three consecutive X's
 		//means X wins!
-		if(boardArray[i] == "X" && boardArray[i+1] =="X" && boardArray[i+2] =="X" && i !=2 && i!=5 && i !=1 && i!=4){
+		if(boardArray[i] == piece && boardArray[i+1] ==piece && boardArray[i+2] ==piece && (i==0 || i==3 || i==6)){
 
 			xWins = true;
 			console.log(xWins);
 		}
 		//checks vertical matches
-		if(boardArray[i] =="X" && boardArray[i+3] =="X" &&boardArray[i+6]=="X"){
+		if(boardArray[i] ==piece && boardArray[i+3] ==piece &&boardArray[i+6]==piece){
 			xWins = true;
 			console.log(xWins);
 		}
 		//checks diagonal to the right
-		if(boardArray[i] =="X" && boardArray[i+4] =="X" && boardArray[i+8] =="X"){
+		if(boardArray[i] ==piece && boardArray[i+4] ==piece && boardArray[i+8] ==piece){
 			xWins = true;
 			console.log(xWins);
 		}
 		//checks diagonal to the left
-		if(boardArray[i] =="X" && boardArray[i+2] =="X" && boardArray[i+4] =="X"){
+		if(i == 2 && boardArray[i] ==piece && boardArray[i+2] ==piece && boardArray[i+4] ==piece){
 			xWins = true;
 			console.log(xWins);
 		}
 		// if our board is full, and we haven't declared a winner
 		//we must have a tie!
-			if(turn ==9 && xWins != true){
-				tie = true;
-			}
-	}
-	if(xWins == true){
-		displayXWins();
-	}
-	if(tie == true){
-		displayTies();
-	}
-}
-
-var checkWinnersO = function(){
-	for(var i=0; i<7; i++){
-		//checks horizontal matches. Provided we aren't counting form
-		//the 2nd, 3rd, 5th, or 6th tile, three consecutive O's means
-		//X wins
-		if(boardArray[i] == "O" && boardArray[i+1] =="O" && boardArray[i+2] =="O" && i !=2 && i!=5 && i !=1 && i!=4){
-			oWins = true;
-			console.log(xWins);
-		}
-		//checks vertical matches
-		if(boardArray[i] =="O" && boardArray[i+3] =="O" &&boardArray[i+6]=="O"){
-			oWins = true;
-			console.log(xWins);
-		}
-		//checks diagonals to the right
-		if(boardArray[i] =="O" && boardArray[i+4] =="O" && boardArray[i+8] =="O"){
-			oWins = true;
-			console.log(xWins);
-		}
-		//checks diagonals to the left
-		if(boardArray[i] =="O" && boardArray[i+2] =="O" && boardArray[i+4] =="O"){
-			oWins = true;
-			console.log(xWins);
-		}
-		// if our board is full, and we haven't declared a winner
-		//we must have a tie!
-
 		if(turn ==9 && xWins != true){
 			tie = true;
 		}
 	}
-	if(tie == true){
+	if(xWins == true){
+		if(piece=="X"){
+			displayXWins();
+			xScore++;
+			//get Id for xBox
+			var xBox = document.getElementById("xScoreBox");
+			xBox.innerHTML = xScore;
+		}
+	
+	if(piece == "O"){
+		displayOWins();
+		oScore++;
+		//get Id for oBox
+		var oBox = document.getElementById("oScoreBox");
+		oBox.innerHTML = oScore;
+		}
+	}
+	
+	else if(tie == true){
 		displayTies();
+
+	}
 	}
 
-}
+
+
 
 //changes the text on the board to "O WINS"
 var displayOWins = function(){
@@ -187,7 +182,7 @@ var displayXWins = function(){
 }
 
 var playAgain = function(){
-	for(var i=0; i<8; i++){
+	for(var i=0; i<9; i++){
 		tiles[i].innerHTML = "";
 	}
 	boardArray = [undefined, undefined,undefined, undefined, undefined, undefined, undefined, undefined, undefined];
@@ -207,6 +202,14 @@ var displayTies = function(){
 	tiles[6].innerHTML = "I";
 	tiles[7].innerHTML = "E";
 	tiles[8].innerHTML = "D";
+
+
+}
+var takeBack = function(){
+	turn --;
+	boardArray[lastTile] = "undefined";
+	tiles[lastTile].innerHTML = "";
+
 
 
 }

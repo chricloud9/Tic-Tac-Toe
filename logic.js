@@ -19,7 +19,6 @@ var boardArray = [undefined, undefined,undefined, undefined, undefined, undefine
 //Sets a var equal to an array of the tile divs in our document
 var tiles = document.getElementsByClassName("tile");
 
-
 var addAvatar = function(tileNumber){
 	lastTile = tileNumber;
 	//We always start with X, so if our turn number is even, we should be putting an X into that div
@@ -30,7 +29,6 @@ var addAvatar = function(tileNumber){
 		tie = false;
 		turn = 0;
 	}
-
 	
 	if(turn%2 ==0){
 		if(boardArray[tileNumber] != undefined){
@@ -79,8 +77,6 @@ var addAvatar = function(tileNumber){
 				console.log("checking winners");
 				checkWinners("O");
 			}
-			
-			
 		}
 	}
 
@@ -131,7 +127,6 @@ var checkWinners = function(piece){
 		if(turn == 9 && (xWins != true || oWins != true))
 			tie = true;
 		
-		
 		if(xWins == true || oWins == true){
 			displayWins();
 			//get Id for xBox
@@ -144,9 +139,6 @@ var checkWinners = function(piece){
 
 		}
 }
-
-
-
 
 //changes the text on the board to "O WINS"
 var displayWins = function(){
@@ -179,7 +171,6 @@ var displayWins = function(){
 
 }
 
-
 var playAgain = function(){
 	for(var i=0; i<9; i++){
 		tiles[i].innerHTML = "";
@@ -201,7 +192,6 @@ var displayTies = function(){
 	tiles[6].innerHTML = "I";
 	tiles[7].innerHTML = "E";
 	tiles[8].innerHTML = "D";
-
 
 }
 var takeBack = function(){

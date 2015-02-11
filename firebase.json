@@ -1,0 +1,9 @@
+{
+  "firebase": "tic-tac-toe-do",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

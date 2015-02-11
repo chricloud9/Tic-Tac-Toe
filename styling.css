@@ -1,10 +1,34 @@
+#title{
+	color: white;
+	font-size: 60px;
+	margin: 0% 20% 0% 20%;
+}
+#container{
+	width: 411px;
+	height: 305px;
+	margin: 6.5% 35% 0% 30%;
+}
+
+
+/*#board{
+	background-color: white;
+}*/
+
+#scoreBoxBox{
+	width: 20%;
+	height: 30%;
+	background-color:black;
+	/*margin: 50px 0px -460px 900px;*/
+	/*background-color: #E5D75B;*/
+}
+
 .scoreBox{
 	position: absolute;
-	color: #E8DDCB;
+	color: #FFFDF4;
 }
 
 #oScoreBox{
-	margin:10% 0% 0% 76%;
+	margin:10% 0% 0% 85%;
 	width: 120px;
 	height: 120px;
 	font-size: 120px;
@@ -12,18 +36,20 @@
 }
 
 #oScore{
-	margin: .5% 0% 0% 75%;
+	margin: .5% 0% 0% 85%;
+	color: #FFFDF4;
 }
 
 #xScoreBox{
-	margin: 10% 0% 0% 11%;
+	margin: 10% 0% 0% 75%;
 	width: 120px;
 	height: 120px;
 	font-size: 120px;
 }
 
 #xScore{
-	margin: .5% 0% 0% 10%;
+	margin: .5% 0% 0% 75%;
+	color: #FFFDF4;
 }
 
 
@@ -49,49 +75,21 @@
 	height:670px;
 	border:3px dashed #E8DDCB;
 	border-radius: 50%;
-	margin: -5px 0px 0px 250px;
+	margin: -5px 0px 0px 50px;
+	opacity: .9;
 
 }
 body{
 
 	/*background-color: #0D0106;*/
 	/*/kind of a purple color*/
-	/*background-color: #240B36;*/
-	background-color: #031634;
-}
-#tile_1{
-	margin:0px 0px 0px -15px;
-	
+	background-color: #240B36;
+	/*background-color: #031634;*/
+	background-image: url("images/pier.JPG");
+	background-size: cover;
 
 }
-#tile_2{
-	margin:0px 0px 0px 142px;
-}
-#tile_3{
-	margin:0px 0px 0px 299px;
-}
-#tile_4{
-	margin:152px 0px 0px 0px;
-}
-#tile_5{
-	margin:152px 0px 0px 157px;
-	
-}
-#tile_6{
-	margin:152px 0px 0px 314px;
-}
-#tile_7{
-	margin:304px 0px 0px 0px;
-	
-}
-#tile_8{
-	margin:304px 0px 0px 157px;
-	
-}
-#tile_9{
-	margin:304px 0px 0px 314px;
-	
-}
+
 #backBoard{
 	width: 475px;
 	height: 475px;
@@ -103,30 +101,33 @@ body{
 	/*background-color: #A4031F;*/
 	background-color: #033649;
 	border-radius: 2%;
-
+	opacity: .8;
 }
 
-
 .tile{
-	width: 115px;
+	width: 130px;
 	height: 130px;
 	font-size: 100px;
 	/*background-color: #FF331F;*/
-	background-color: #0D090A;
+	background-color: red;
 	z-index: 2;
 	border: 1px #E8DDCB solid;
-	position: absolute;
-	padding: 20px 0px 0px 35px;
+
 	color:#E8DDCB;
+	opacity: .6;
+	border: 1px solid black;
+	display: inline-block;
+	vertical-align: middle;
 
 
 }
 #board{
-	position:absolute;
+	
 	width: 453px;
 	height: 450px; 
-	margin: 50px 0px 0px 300px;
+	margin: 50px 0px 0px 100px;
 	z-index: 1;
+	/*opacity: .4;*/
 
 }
 #row1{
